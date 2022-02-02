@@ -61,7 +61,14 @@ def rivers_by_station_number(stations, N):
     rivernumpy = river2.items()
     rivernumppy = list(rivernumpy)
     rivernumppy.sort(key = lambda x:x[1], reverse = True)
-    return rivernumppy[:N+1]
+    x =  rivernumppy[:N]
+    y = rivernumppy[N:]
+    for n in range(len(y)):
+        if x[N-1][1] == y[n][i]:
+            x.append(y[n])
+        else:
+            pass
+    return x
 
    
 
