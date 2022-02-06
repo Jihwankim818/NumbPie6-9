@@ -9,7 +9,8 @@ geographical data.
 from pickle import TUPLE1
 from floodsystem.station import MonitoringStation
 from haversine import haversine
-from floodsystem.utils import sorted_by_key  # noqa
+from floodsystem.utils import sorted_by_key
+from .analysis import polyfit  # noqa
 
 
 
@@ -17,9 +18,9 @@ from floodsystem.utils import sorted_by_key  # noqa
 def stations_by_distance(stations, p):
     z = []
     for n in range(len(stations)):
-        tuple1 = (stations[n].name , haversine(stations[n].coord, p))
+        tuple1 = (stations[n].name , stations[n].town, haversine(stations[n].coord, p))
         z.append(tuple1)
-    x = sorted_by_key(z, 1)
+    x = sorted_by_key(z, 2)
     return x
     
 
@@ -43,11 +44,15 @@ def rivers_with_station(stations):
 def stations_by_river(stations):
     RiverStat = {}
     RiverStat.update({'River Cam': ''})
+    x = []
     for n in range(len(stations)):
         if stations[n].river == 'River Cam':
-            RiverStat['River Cam'] = RiverStat['River Cam'] + ' ' + '{},'.format(stations[n].name)
-    x = RiverStat['River Cam']
-    return x
+            x.append(stations[n].name)
+    x.sort()
+    RiverStat['River Cam'] = (x)
+    return RiverStat['River Cam']
+    
+   
 
 def rivers_by_station_number(stations, N):
     river2 ={}

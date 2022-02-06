@@ -15,6 +15,8 @@ def run():
     print(x[:10])
     print("------------")
     print(x[-10:])
+
+
     
 
 if __name__ == "__main__":

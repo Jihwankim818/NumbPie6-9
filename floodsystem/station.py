@@ -5,14 +5,14 @@
 for manipulating/modifying station data
 
 """
-
+from turtle import update
+from floodsystem.utils import sorted_by_key
 
 class MonitoringStation:
     """This class represents a river level monitoring station"""
 
     def __init__(self, station_id, measure_id, label, coord, typical_range,
                  river, town):
-
         self.station_id = station_id
         self.measure_id = measure_id
 
@@ -26,9 +26,12 @@ class MonitoringStation:
         self.typical_range = typical_range
         self.river = river
         self.town = town
-
+        
+        
         self.latest_level = None
+        
 
+        
     def __repr__(self):
         d = "Station name:     {}\n".format(self.name)
         d += "   id:            {}\n".format(self.station_id)
@@ -38,7 +41,7 @@ class MonitoringStation:
         d += "   river:         {}\n".format(self.river)
         d += "   typical range: {}".format(self.typical_range)
         return d
-
+    
     def typical_range_consistent(self):
         if self.typical_range == None:
             return False
@@ -48,6 +51,13 @@ class MonitoringStation:
             return False
         else:
             return True
+    
+    def relative_water_level(self):
+        x = self.typical_range_consistent()
+        if x == True and self.latest_level != None:
+            return (self.latest_level - self.typical_range[0])/(self.typical_range[1] - self.typical_range[0])
+        else:
+            return None
 
 
 def inconsistent_typical_range_stations(stations):
@@ -58,3 +68,5 @@ def inconsistent_typical_range_stations(stations):
             newlist.append(stations[n].name)
     newlist.sort()
     return newlist
+
+
