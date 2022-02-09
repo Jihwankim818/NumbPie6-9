@@ -61,15 +61,13 @@ def rivers_by_station_number(stations, N):
              river2.update({stations[n].river: 1})
         elif stations[n].river in river2:
              river2[stations[n].river] = river2[stations[n].river] + 1
-
-    
     rivernumpy = river2.items()
     rivernumppy = list(rivernumpy)
     rivernumppy.sort(key = lambda x:x[1], reverse = True)
     x =  rivernumppy[:N]
     y = rivernumppy[N:]
     for n in range(len(y)):
-        if x[N-1][1] == y[n][i]:
+        if x[N-1][1] == y[n][1]:
             x.append(y[n])
         else:
             pass
