@@ -8,6 +8,7 @@ update_water_levels(stations)
 def test_stations_level_over_threshold():
     x = stations_level_over_threshold(stations, 0.8)
     assert len(x) > 0
+    assert x[0][0] == 'Letcombe Bassett'
 
 
 
