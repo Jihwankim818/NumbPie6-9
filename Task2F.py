@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from floodsystem.datafetcher import fetch_measure_levels
 import datetime
+from matplotlib.dates import date2num
 
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.plot import plot_water_levels,plot_water_level_with_fit
@@ -26,7 +27,8 @@ def run():
              x.append(station)
           else:
              pass
-    x.pop(2)
+    print(x)
+    x.pop(3)
    
 
 
