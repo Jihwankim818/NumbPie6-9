@@ -10,6 +10,8 @@ def plot_water_levels(station, dates, levels):
     
         
     plt.plot(dates, levels)
+    plt.plot(dates, [station.typical_range[0]]*len(dates))
+    plt.plot(dates, [station.typical_range[1]]*len(dates))
     plt.xlabel('date')
     plt.ylabel('water level (m)')
     plt.xticks(rotation=45)
@@ -22,7 +24,8 @@ def plot_water_level_with_fit(station, dates, levels, p):
     poly, d0 = polyfit(dates, levels, p)
     hi = date2num(dates)
     plt.plot(dates, levels, '-')
-   
+    plt.plot(dates, [station.typical_range[0]]*len(dates))
+    plt.plot(dates, [station.typical_range[1]]*len(dates))
     plt.plot(dates, poly(hi-d0))
     
     

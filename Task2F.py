@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from floodsystem.datafetcher import fetch_measure_levels
 import datetime
-from matplotlib.dates import date2num
 
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.plot import plot_water_levels,plot_water_level_with_fit
@@ -27,14 +26,17 @@ def run():
              x.append(station)
           else:
              pass
-    print(x)
-    x.pop(3)
+   
    
 
 
     dt = 2
     for i in range(len(x)):
         dates, levels = fetch_measure_levels(x[i].measure_id, dt=datetime.timedelta(days=dt))
-        plot_water_level_with_fit(x[i], dates, levels, 4)
+        try:
+           consistency = True
+           plot_water_level_with_fit(x[i], dates, levels, 4)
+        except:
+           consistency = False
 
 run()
